@@ -1,23 +1,24 @@
 package wskz;
-
 import java.util.ArrayList;
 import java.util.List;
-
-class Figure {
+public abstract class Figure implements Misc {
+    Figure() {};
     private List<Point> points;
-
     void setPoint(double a, double b) {
         if (points == null) {
             points = new ArrayList<>();
         }
         points.add(new Point(a, b));
     }
-
+    public List<Point> getPoints() {
+        return points;
+    }
+    protected List<Segment> getSegments() {
+        return calcSegments();
+    }
     /*klasa nie może zostać zainicjowana!
       jedynie mogą zostać wykorzystane jej elementy!
      */
-    Figure() {};
-
     private List<Segment> calcSegments() {
         if (points.toArray().length > 1) {
             var seg = new ArrayList<Segment>();
@@ -30,7 +31,7 @@ class Figure {
                 Segment s = new Segment();
                 s.calculate(point, p);
                 seg.add(s);
-                point = null;
+                point = p;
             }
             if (point != null) {
                 Segment s = new Segment();
@@ -43,17 +44,16 @@ class Figure {
         seg.add(new Segment());
         return seg;
     }
-
-    protected double calculatePerimiter() {
+    public double calculatePerimiter() {
         double r = 0;
         for(Segment s : calcSegments()) {
             r+=s.getLength();
         }
-        return 0;
+        return r;
     }
-
     public double calculateField() {
-
+    /* Pole jest zawsze zależne od figury; stąd domyślnie zwraca wartość 0 */
         return 0;
     }
+    public abstract void addPoint(double x, double y);
 }
