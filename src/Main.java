@@ -1,8 +1,7 @@
-//import wskz.Figure; //to nie zadziała!
-import wskz.Figure;
-import wskz.Square;
-import wskz.Triangle;
-import java.io.IOException;
+//import myJava.Figure; //to nie zadziała!
+import myJava.Figure;
+import myJava.Square;
+import myJava.Triangle;
 import java.util.Scanner;
 public class Main {
     void calcSquare() {
